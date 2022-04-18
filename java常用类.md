@@ -73,21 +73,6 @@
             		System.out.println(obj);
         		}
 
-## 二维数组(多层嵌套数组)
-	* 1.创建：
-			* int[][] a=new int[3][2];//分配3个外层空间和2个内层空间
-       		* int[][] b= {{2,3},{4,5},{6,7}};//声明二维数组
-
-	* 2.方法：
-		* 变量名[外层下标][内层下标];//返回一个int类型,获取下标为xx对应的元素
-		* 变量名.length; //返回一个int类型，获取二维数组外层空间长度
-
-	* 3.嵌套遍历：
-		* for(int[]ints:b) {
-				for(int x:ints) {
-					System.out.println(x);
-				}
-		  }
 
 
 ## 集合概念：用来存储对象的容器，其对象只能是实体类或基本数据类型的包装类。
@@ -112,24 +97,6 @@
 		 for (Object obj : al) {
             System.out.println(obj);
         }
-
-## HashSet、TreeSet集合类：TreeSet可实现数字(或字母)的升序排列
-	* 1.创建：
-			* HashSet<Object> hs=new HashSet(); //泛型集合
-			* TreeSet<Object> ts=new TreeSet();
-	* 2.方法：
-		# 无get()方法
-		* al.add();
-		* al.size(); //返回一个int类型，集合有多少个对象。
-		* al.remove(stu2);   //移除某一个对象元素：
-		* al.clear();  //清除集合的所有对象
-		* al.isEmpty(); //返回一个boolean类型，判断集合是否为空
-		* al.contains(stu3); //返回一个boolean类型，判断集合是否添加有对象stu3
-	* 3.遍历：
-		 for (Object obj : al) {
-            System.out.println(obj);
-        }
-
 ## HashMap集合类
 	* 1.创建：
 			 HashMap<Object,Object> hm = new HashMap<>();
@@ -180,7 +147,7 @@
 	* 创建：
 		* Scanner s = new Scanner(System.in);
 		
-	* 方法：
+	* 方法：在调用方法之前需要给出提示信息？
 		* s.next();      	//返回一个String类型，接收字符串类型的输入
 		* s.nextInt();  	//返回一个int类型接收,整型类型的输入
 		* s.nextDouble(); 	//返回一个double类型,接收浮点型类型的输入
@@ -315,6 +282,39 @@
 	* 创建：
 		*    Stu stu = new Stu();
 	* 方法：Stu man=stu.clone(); //	对stu对象进行克隆--成man对象
+## HashSet、TreeSet集合类：TreeSet可实现数字(或字母)的升序排列
+	* 1.创建：
+			* HashSet<Object> hs=new HashSet(); //泛型集合
+			* TreeSet<Object> ts=new TreeSet();
+	* 2.方法：
+		# 无get()方法
+		* al.add();
+		* al.size(); //返回一个int类型，集合有多少个对象。
+		* al.remove(stu2);   //移除某一个对象元素：
+		* al.clear();  //清除集合的所有对象
+		* al.isEmpty(); //返回一个boolean类型，判断集合是否为空
+		* al.contains(stu3); //返回一个boolean类型，判断集合是否添加有对象stu3
+	* 3.遍历：
+		 for (Object obj : al) {
+            System.out.println(obj);
+        }
+	
+## 二维数组(多层嵌套数组)
+	* 1.创建：
+			* int[][] a=new int[3][2];//分配3个外层空间和2个内层空间
+       		* int[][] b= {{2,3},{4,5},{6,7}};//声明二维数组
+
+	* 2.方法：
+		* 变量名[外层下标][内层下标];//返回一个int类型,获取下标为xx对应的元素
+		* 变量名.length; //返回一个int类型，获取二维数组外层空间长度
+
+	* 3.嵌套遍历：
+		* for(int[]ints:b) {
+				for(int x:ints) {
+					System.out.println(x);
+				}
+		  }
+
 
 ## BufferedImage类：图片
 	* 1.创建：
