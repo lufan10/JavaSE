@@ -161,12 +161,12 @@
 	*
 	*   抽象类：只有方法签名，没有方法体，使用了abstract修饰
 
-			* 父类被抽象化了，不能实列化对象，只能被子类继承。
-				* 例如：public abstract class Animal{}
-			* 父类定义了抽象方法后，子类(没有被抽象时)必须实现方法重写 
-				* 例如：public abstract void eat();
+		* 父类被抽象化了，不能实列化对象，只能被子类继承。
+			* 例如：public abstract class Animal{}
+		* 父类定义了抽象方法后，子类(没有被抽象时)必须实现方法重写 
+			* 例如：public abstract void eat();
 
-	*  接口类：
+	*  接口类：更抽象，体现规范思想。
 	
 		*  1.属性：全局静态常量
 		*  2.方法：必须是public抽象方法
