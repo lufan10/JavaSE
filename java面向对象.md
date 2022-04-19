@@ -64,40 +64,127 @@
 	作用域                                                               在所归属的大括号中
 ## 静态关键字：static
 	* 作用：
-	static是静态的意思，可以修饰成员变量和成员方法。
-	static修饰成员变量表示该成员变量只在内存中只存储一份，可以被共享访问、修改。
-![image](https://user-images.githubusercontent.com/95632226/163998905-6005d223-8c0a-46c9-b1bc-b0148b741f19.png)
-
+		* static是静态的意思，可以修饰成员变量和成员方法。
+		* static修饰成员变量表示该成员变量只在内存中只存储一份，可以被共享访问、修改。
+	* static修饰成员变量的内存原理:堆区的对象成员变量指向堆区的静态成员变量。
+	* static修饰成员方法的内存原理:栈区的变量指向堆区对象空间地址，堆区的方法引用指向对应方法区的方法。
+	* 定义工具类:
+		* 建议工具类的构造器私有化处理。
+		* 工具类不需要创建对象
+	* static访问注意实现：
+		1.静态方法只能访问静态的成员，不可以直接访问实例成员。
+		2.实例方法可以访问静态的成员，也可以访问实例成员。
+		3.静态方法中是不可以出现this关键字的。 
+## static应用知识：代码块
+	* 代码块概述
+		代码块是类的5大成分之一（成员变量、构造器，方法，代码块，内部类），定义在类中方法外。
+		在Java类下，使用 { } 括起来的代码被称为代码块 。
+	* 静态代码块: 
+		格式：static{}
+		特点：需要通过static关键字修饰，随着类的加载而加载，并且自动触发、只执行一次
+		使用场景：在类加载的时候做一些静态数据初始化的操作，以便后续使用。
+		
+## static应用知识：单例设计模式
+	* 饿汉单例设计模式:在用类获取对象的时候，对象已经提前为你创建好了。
+	* 实列：public class SingleInstance { 
+			//定义一个静态变量存储一个对象即可 :属于类，与类一起加载一次  
+			public static SingleInstance instance = new SingleInstance ();  
+			//单例必须私有构造器* 
+			private SingleInstance (){      
+				System.out.println("创建了一个对象"); 
+			}
+		}
+	* 懒汉单例设计模式:在真正需要该对象的时候，才去创建一个对象(延迟加载对象)。
+	* 实列：public class SingleInstance{  
+			/** 定义一个静态变量存储一个对象即可 :属于类，与类一起加载一次 */
+			public static SingleInstance instance ; // null
+			/** 单例必须私有构造器*/   
+			private SingleInstance(){}    
+			/** 必须提供一个方法返回一个单例对象  */  
+			public static SingleInstance getInstance(){   
+				...    
+				return ...;  
+			}
+		}
 
 ## 类的继承：
 	* 继承：编写父类：定义公共属性和方法
 	* 编写子类特有的属性和方法，并继承父类（无private）属性和方法
-		
+	* 继承的特点:
+		1.子类可以继承父类的属性和行为，但是子类不能继承父类的构造器。
+		2.Java是单继承模式：一个类只能继承一个直接父类。
+		3.Java不支持多继承、但是支持多层继承。
+	* 在子类方法中访问成员（成员变量、成员方法）满足：就近原则
 	* 方法重写：子父的方法同名，子类对其具体化。
+		* 建议重写方法都加@Override注解，代码安全，优雅！
+		* 重写方法有哪些基本要求？
+			1.重写方法的名称和形参列表应该与被重写方法一致。
+			2.私有方法不能被重写。
+			3.子类重写父类方法时，访问权限必须大于或者等于父类被重写的方法的权限
+
 	
-		*   extents关键字：子类继承父类  例如：public class Dog extents Animal{}
-		*   implements关键字：子类继承接口类 例如：public class cellPhone implements Mp3,Mp4{}
-		
-		*   super关键字：手动调用父类的构造方法，形成子类的构造方法。 例如：
-				*   public Dog(String name, int age, String color, String type) {
-				*         super(name, age, color, type);
-				*   }
-		*   final关键字：
-				*   1.写在修饰符前，其父类不能被继承；其方法不被子类重写。
-				*   2. 写在变量类前，其变量的值不能改变。
+	*   extents关键字：子类继承父类  例如：public class Dog extents Animal{}
 	
-		*   Object类：是所有类的最终父类，所有类都默认的继承Object类
-		*
-		*   抽象类：
-				* 父类被抽象化了，不能实列化对象，只能被子类继承。
-					* 例如：public abstract class Animal{}
-				* 父类定义了抽象方法后，子类(没有被抽象时)必须实现方法重写 
-					* 例如：public abstract void eat();
+
+	*   super关键字：
+		* 子类访问父类的成员:
+			格式：super.父类成员变量/父类成员方法
+		* 手动调用父类的构造方法，形成子类的构造方法。 例如：
+			*   public Dog(String name, int age, String color, String type) {
+			*         super(name, age, color, type);
+			*   }
+		* this.属性/方法：调用本类的属性/方法
+		* this(...)和super(…)使用注意点：
+			子类通过 this (...）去调用本类的其他构造器，本类其他构造器会通过 super 去手动调用父类的构造器，最终还是会调用父类构造器的。
+			注意：this(…) super(…) 都只能放在构造器的第一行，所以二者不能共存在同一个构造器中。
+
+	*   枚举的概述:是Java中的一种特殊类其作用："是为了做信息的标志和信息的分类"。
+		* 定义枚举类的格式：
+		 修饰符 enum 枚举名称{
+            		第一行都是罗列枚举类实例的名称。
+			}
+		* 实列：enum Season{ 
+				SPRING , SUMMER , AUTUMN , WINTER;
+			}
+		* 枚举的特征：
+			枚举类都是继承了枚举类型：java.lang.Enum
+			枚举都是最终类，不可以被继承。
+			构造器都是私有的，枚举对外不能创建对象。
+			枚举类的第一行默认都是罗列枚举对象的名称的。
+			枚举类相当于是多例模式。
+
+	*   final关键字：
+			*   1.写在修饰符前，其父类不能被继承；其方法不被子类重写。
+			*   2. 写在变量类前，其变量的值不能改变。
+
+	*   Object类：是所有类的最终父类，所有类都默认的继承Object类
+	*
+	*   抽象类：只有方法签名，没有方法体，使用了abstract修饰
+
+			* 父类被抽象化了，不能实列化对象，只能被子类继承。
+				* 例如：public abstract class Animal{}
+			* 父类定义了抽象方法后，子类(没有被抽象时)必须实现方法重写 
+				* 例如：public abstract void eat();
+
+	*  接口类：
+	
+		*  1.属性：全局静态常量
+		*  2.方法：必须是public抽象方法
+		*  3.无构造方法且不能实例化对象
+		*  子类继承接口类 例如：public class cellPhone implements Mp3,Mp4{}
+		*  多继承：interface A extends 接口B,接口C{} 
 		
-		*  接口类：
-			*  1.属性：全局静态常量
-			*  2.方法：必须是public抽象方法
-			*  3.无构造方法且不能实例化对象
+		* 接口的格式如下：
+			public interface 接口名 {
+			       // 常量
+			       // 抽象方法
+			} 
+			
+		* 新增接口方法：
+			* 默认方法：default void run(){}
+			* 静态方法：用接口名调用   static void inAdd(){}
+			* 私有方法：在接口内部调用 private void go(){}
+
 
 ## 类的多态：发送消息给某个对象，让该对象自行决定响应何种行为。
 		Master master=new Master();
