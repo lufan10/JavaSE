@@ -231,12 +231,42 @@
 		}
 	};
 	a. run();
-## Lambda表达式:简化匿名内部类的代码写法必须是接口的匿名内部类，接口中只能有一个抽象方法。
+## Lambda表达式:简化函数式接口的匿名内部类的写法。其写法必须是接口的匿名内部类，接口中只能有一个抽象方法。
+	* 先编写出匿名内部类，根据idea工具中异常提示自动修复生成Lamaba表达式
 	* 格式：
 	(匿名内部类被重写方法的形参列表) -> {
 	被重写方法的方法体代码。
 	}
 	注：-> 是语法形式，无实际含义
+	* 体验Lambda表达式
+	public class LambdaDemo1 {
+		public static void main(String[] args) {
+			goSwimming( new Swimming() {
+				@Override
+				public void swim() {
+					System.out.println("铁汁, 我们去游泳吧~");
+				}
+			} );
+		}
+		public static void goSwimming(Swimming swimming) {
+			swimming.swim();
+		}
+	}
+	public class LambdaDemo1 {
+		public static void main(String[] args) {
+			 goSwimming( () -> System.out.println("铁汁, 我们去游泳吧~"));
+		}
+		public static void goSwimming(Swimming swimming) {
+				swimming.swim();
+		}
+	}
+	interface Swimming{
+   		 void swim();
+	}
+	
+		
+
+
 
 
 
