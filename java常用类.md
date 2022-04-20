@@ -146,6 +146,45 @@
 		⚫ 数组适合做数据个数和类型确定的场景
 		⚫ 集合适合做数据个数不确定，且要做增删元素的场景
 	* 集合中存储的元素并不是对象本身，而是对象的地址。
+	* 约定集合存储数据的类型，需要注意什么？
+		集合支持泛型。
+		集合和泛型不支持基本类型，只支持引用数据类型。
+
+## 集合类体系结构：
+	* Collection单列集合，每个元素（数据）只包含一个值。
+		* Collection是单列集合的祖宗接口，它的方法是全部单列集合都可以继承使用的。
+		* List系列集合：添加的元素是有序、可重复、有索引。
+			ArrayList、LinekdList ：有序、可重复、有索引。
+		* Set系列集合：添加的元素是无序、不重复、无索引。
+			HashSet: 无序、不重复、无索引；LinkedHashSet: 有序、不重复、无索引。
+			TreeSet：按照大小默认升序排序、不重复、无索引。
+	* Collection集合的遍历方式
+		方式一：迭代器
+		方式二：foreach/增强for循环
+		方式三：lambda表达式
+		ArrayList<String> al = new ArrayList<>();
+		al.add("a");
+		al.add("b");
+		al.add("c");
+		
+		Iterator<String> it = al.iterator();
+		while (it.hasNext()) {
+		    String s = it.next();
+		    System.out.println(s);
+		}
+		System.out.println("========");
+		for (String s : al) {
+		    System.out.println(s);
+		}
+		System.out.println("========");
+		al.forEach(s -> {
+		    System.out.println(s);
+		});
+		
+
+
+	* Map双列集合，每个元素包含两个值（键值对）。
+
 
 ## ArrayList集合类：
 
@@ -166,6 +205,10 @@
 		* al.clear();  //清除集合的所有对象
 		* al.isEmpty(); //返回一个boolean类型，判断集合是否为空
 		* al.contains(stu3); //返回一个boolean类型，判断集合是否添加有对象stu3
+		* al.toArray(); // 返回一个Object类的数组，把集合中的元素，存储到数组中
+
+
+
 
 	* 3.遍历：
 		从集合中遍历元素，并筛选出元素删除它，应该怎么解决？
