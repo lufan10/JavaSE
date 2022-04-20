@@ -153,9 +153,10 @@
 ## 集合类体系结构：
 	* Collection单列集合，每个元素（数据）只包含一个值。
 		* Collection是单列集合的祖宗接口，它的方法是全部单列集合都可以继承使用的。
-		* List系列集合：添加的元素是有序、可重复、有索引。
-			ArrayList、LinekdList ：有序、可重复、有索引。
-		* Set系列集合：添加的元素是无序、不重复、无索引。
+		* List接口系列的实现类集合：添加的元素是有序、可重复、有索引。
+			ArrayList底层是基于数组实现的，根据查询元素快，增删相对慢。
+			LinkedList底层基于双链表实现的，查询元素慢，增删首尾元素是非常快的。
+		* Set接口系列的实现类集合：添加的元素是无序、不重复、无索引。
 			HashSet: 无序、不重复、无索引；LinkedHashSet: 有序、不重复、无索引。
 			TreeSet：按照大小默认升序排序、不重复、无索引。
 	* Collection集合的遍历方式
@@ -218,6 +219,16 @@
 		    System.out.println(obj);
 		}
 	
+## LinkedList集合类的特有功能
+	* 创建： LinkedList<Object> ll = new LinkedList<>();
+	* 方法：
+		* ll.addFirst(); //
+		* ll.addLast();
+		* ll.getFirst();
+		* ll.getLast();
+		* ll.removeLast();
+		* ll.removeFirst();
+
 
 ## HashMap集合类
 	* 1.创建：
