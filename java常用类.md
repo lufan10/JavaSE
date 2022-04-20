@@ -1,4 +1,4 @@
-## 1.变量数据类
+## 变量数据类
 	* 基本数据类型：保存在栈区，创建一个固定空间保存的基本数据类型
 		①：数值型：
 			* int(整型 占4个字节)、long(长整型)、short(短整型)、byte(字节型 占1个字节)
@@ -61,6 +61,15 @@
 		    *  Integer、Long、Short、Byte
 		    *  Double、Float
 		    *  Character、Boolean
+	    * StringBuilder类：是一个可变字符串类(对象容器)
+	    	* 创建：
+			StringBuilder sb = new StringBuilder(); //无参
+			StringBuilder sb = new StringBuilder("初始值");//有参
+		* 方法：
+			sb.append("a").append("b").……; //添加数据并拼接，支持链式编程
+			sb.length(); //返回对象内容的长度
+			sb.reverse(); //将对象内容反转
+			sb.to String();//实现把StringBuilder转换为String
 		    
     * 数据类型转换：
 	    * 1.整数转字符串：
@@ -78,6 +87,13 @@
 	    * 强制类型转换有哪些需要注意的？
 		⚫ 可能出现数据丢失。
 		⚫ 小数强制转换成整数是直接截断小数保留整数。
+		
+## Objects类
+	* 创建：静态方法无需创建，直接用类名Objects调用即可。
+	* 方法：
+		Objects.equals(Object o1,Object 02); //返回一个boolean类型，判断内容相等且安全。
+		Objects.isNull(Object obj); //返回一个boolean类型，判断对象变量是否为null，是则true。
+
 ## 数组概念：
 	* 用来存储相同的数据类型或对象类的内存区域（一个容器）
  	* 索引(下标)：对数组进行编号，从0开始。如：变量名[0]=元素1
