@@ -154,11 +154,12 @@
 	* Collection单列集合，每个元素（数据）只包含一个值。
 		* Collection是单列集合的祖宗接口，它的方法是全部单列集合都可以继承使用的。
 		* List接口系列的实现类集合：添加的元素是有序、可重复、有索引。
-			ArrayList底层是基于数组实现的，根据查询元素快，增删相对慢。
-			LinkedList底层基于双链表实现的，查询元素慢，增删首尾元素是非常快的。
+			ArrayList： 底层是基于数组实现的，根据查询元素快，增删相对慢。
+			LinkedList：底层基于双链表实现的，查询元素慢，增删首尾元素是非常快的。
 		* Set接口系列的实现类集合：添加的元素是无序、不重复、无索引。
-			HashSet: 无序、不重复、无索引；LinkedHashSet: 有序、不重复、无索引。
-			TreeSet：按照大小默认升序排序、不重复、无索引。
+			HashSet: 无序基于哈希表的,增删改查都快
+			LinkedHashSet: 有序基于哈希表和双链表,增删改查都快
+			TreeSet：按照大小默认升序排序基于红黑树。后续也可以用List集合实现排序,可对对象进行排序
 	* Collection集合的遍历方式
 		方式一：迭代器
 		方式二：foreach/增强for循环
@@ -181,9 +182,6 @@
 		al.forEach(s -> {
 		    System.out.println(s);
 		});
-		
-
-
 	* Map双列集合，每个元素包含两个值（键值对）。
 
 
@@ -192,8 +190,10 @@
 	* 1.创建：  ArrayList<Object> al = new ArrayList<>(); //全局式泛型类集合
 			* ArrayList<实体类/包装类...> al=new ArrayList<>(); //局部式泛型集合
 	* 泛型概述
-		⚫ ArrayList<E>：其实就是一个泛型类，可以在编译阶段约束集合对象只能操作某种数据类型。
-
+		* ArrayList<E>：其实就是一个泛型类，可以在编译阶段约束集合对象只能操作某种数据类型。
+		* 泛型类的格式：修饰符 class 类名<泛型变量>{  }			   public class MyArrayList<T> {}
+		* 泛型方法的格式：修饰符 <泛型变量> 方法返回值 方法名称(形参列表){}  public <T> void show(T t) {}
+		* 泛型接口的格式：修饰符 interface 接口名称<泛型变量>{}  		public interface Data<E>{}
 	* 2.方法：
 		* al.add(new 实体类()/包装类); 
 			* //添加实体类或包装类对象
@@ -222,14 +222,12 @@
 ## LinkedList集合类的特有功能
 	* 创建： LinkedList<Object> ll = new LinkedList<>();
 	* 方法：
-		* ll.addFirst(); //
-		* ll.addLast();
-		* ll.getFirst();
-		* ll.getLast();
-		* ll.removeLast();
-		* ll.removeFirst();
-
-
+		* ll.addFirst(); //在该列表开头插入指定的元素
+		* ll.addLast(); //将指定的元素追加到此列表的末尾
+		* ll.getFirst(); //返回此列表中的第一个元素
+		* ll.getLast(); //返回此列表中的最后一个元素
+		* ll.removeLast(); //从此列表中删除并返回最后一个元素
+		* ll.removeFirst(); //从此列表中删除并返回第一个元素
 ## HashMap集合类
 	* 1.创建：
 			 HashMap<Object,Object> hm = new HashMap<>();
@@ -437,7 +435,10 @@
 		 for (Object obj : al) {
             System.out.println(obj);
         }
-	
+## Collections集合工具类
+	* Collections并不属于集合，是用来操作集合的工具类。
+	* 创建：静态方法无需创建，直接用Collections类名调用即可
+	* 方法：addAll(Collection<? super T> c, T... elements); 给集合对象批量添加元素
 ## 二维数组(多层嵌套数组)
 	* 1.创建：
 			* int[][] a=new int[3][2];//分配3个外层空间和2个内层空间
