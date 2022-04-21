@@ -97,8 +97,33 @@
 		Objects.isNull(Object obj); //返回一个boolean类型，判断对象变量是否为null，是则true。
 
 ## Stream流：用于简化集合和数组操作的API。
+	* 创建：
+		* 集合获取Stream流的方式:
+			* 实现类的单列集合对象.stream(); //获取当前单列集合对象的Stream流
+			* 实现类的双列集合对象.entrySet().stream(); //获取键值对，存储到set集合中去，获取双列集合Stream流
 
+		* 数组获取Stream流的方式:
+			* stream(数组名); //获取当前数组的Stream流
 
+			* Stream.of(T……values); //获取当前数组/可变数据的Stream流
+	* 方法：
+		* filter(lambda表达式); //用于对流中的数据进行过滤
+		* limit(long maxSize); //获取前几个元素
+		* skip(long n); //跳过前几个元素
+		* distinct(); //去除流中重复的元素。依赖(hashCode和equals方法)
+		* concat(Stream a,Stream b); //合并a b流为一个流
+	* 终结操作方法:
+		* forEach(lambda表达式/快捷键 soutc); //遍历单列和双列集合均可。 
+		* count();返回流中的元素个数。
+		
+	* 注意：
+		1.中间方法也称为非终结方法，调用完成后返回新的Stream流可以继续使用，支持链式编程。
+		2.在Stream流中无法直接修改集合、数组中的数据。
+		3.终结操作方法，调用完成后流就无法继续使用了，原因是不会返回Stream了。
+	* 收集Stream流:就是把Stream流操作后的结果数据转回到集合或者数组中去。
+		* 针对List集合： stream.collect(Collectors.toList()); //返回一个List集合
+		* 针对Set集合：  stream.collect(Collectors.toSet());  //返回一个Set集合
+		* 针对Map集合：  stream.collect(Collectors.toMap(Function keyMapper , Function valueMapper);  //返回一个Map集合	
 
 ## 数组概念：
 	* 用来存储相同的数据类型或对象类的内存区域（一个容器）
@@ -123,7 +148,7 @@
 		* 变量名/对象名[下标];  //返回一个int类型,获取下标为xx对应的元素。(取值)
 		* 变量名/对象名[索引]=数据; //对动态数组内的元素赋值
 
-	* 3.遍历：用循环的方式取出数组中每一个元素,搜索、数据统计等等都需要用到遍历。
+	* 3.遍历：用循环的方式取出数组中每一个元素,搜索、数据统计等等都需要用到遍历。快捷键：iter/数组名.fori
 			for (int i = 0; i < ages.length; i++) {
 				System.out.println(ages[i]);
 			}
@@ -169,12 +194,10 @@
 	* Collection集合的遍历方式
 		方式一：迭代器 集合对象调用iterator()方法+快捷键：itit
 		方式二：foreach/增强for循环-----> 快捷键：iter/fori
-		方式三：lambda表达式，集合对象调用forEach()方法
+		方式三：lambda表达式，集合对象调用forEach(针对一个参数时使用快捷键：soutc)方法
 		ArrayList<String> al = new ArrayList<>();
 		al.add("a");
-		al.forEach(s -> {
-		    System.out.println(s);
-		});
+		al.forEach(s->System.out.println(s););  或    al.forEach(System.out::println);
 	* Map双列集合，每个元素包含两个值（键值对）。Map集合的完整格式：{key1=value1 , key2=value2 , key3=value3 , ...}
 		* Map是双列集合的祖宗接口，它的方法是全部双列集合都可以继承使用的。
 		* 实现类：
