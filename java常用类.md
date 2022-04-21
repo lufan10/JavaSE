@@ -96,6 +96,10 @@
 		Objects.equals(Object o1,Object 02); //返回一个boolean类型，判断内容相等且安全。
 		Objects.isNull(Object obj); //返回一个boolean类型，判断对象变量是否为null，是则true。
 
+## Stream流：用于简化集合和数组操作的API。
+
+
+
 ## 数组概念：
 	* 用来存储相同的数据类型或对象类的内存区域（一个容器）
  	* 索引(下标)：对数组进行编号，从0开始。如：变量名[0]=元素1
@@ -194,7 +198,8 @@
 				hm.put("姓名","鲁凡");
 				hm.put("年龄","25");
 				hm.forEach((k,v)-> System.out.println(k+":"+v));
-
+	* 不可变集合：定义完成后不可以修改，或者添加、删除
+		* 创建：List、Set、Map接口中，都存在of方法可以创建不可变集合
 ## 迭代器遍历
 	 *  使用Iterator迭代器遍历序列（其序列可以是不同类型的）调用iterator()方法+快捷键：itit
 	 *  用for-each 循环遍历序列（其序列必须是同类型的）快捷键：iter
