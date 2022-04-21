@@ -1,3 +1,5 @@
+## 类的创建看构造器，类的功能看方法。
+
 ## 变量数据类
 	* 基本数据类型：保存在栈区，创建一个固定空间保存的基本数据类型
 		①：数值型：
@@ -151,7 +153,7 @@
 		集合和泛型不支持基本类型，只支持引用数据类型。
 
 ## 集合类体系结构：
-	* Collection单列集合，每个元素（数据）只包含一个值。
+	* Collection单列集合，每个元素（数据）只包含一个值。Collection集合的格式: [元素1,元素2,元素3..]
 		* Collection是单列集合的祖宗接口，它的方法是全部单列集合都可以继承使用的。
 		* List接口系列的实现类集合：添加的元素是有序、可重复、有索引。
 			ArrayList： 底层是基于数组实现的，根据查询元素快，增删相对慢。
@@ -161,29 +163,56 @@
 			LinkedHashSet: 有序基于哈希表和双链表,增删改查都快
 			TreeSet：按照大小默认升序排序基于红黑树。后续也可以用List集合实现排序,可对对象进行排序
 	* Collection集合的遍历方式
-		方式一：迭代器
-		方式二：foreach/增强for循环
-		方式三：lambda表达式
+		方式一：迭代器 集合对象调用iterator()方法+快捷键：itit
+		方式二：foreach/增强for循环-----> 快捷键：iter/fori
+		方式三：lambda表达式，集合对象调用forEach()方法
 		ArrayList<String> al = new ArrayList<>();
 		al.add("a");
-		al.add("b");
-		al.add("c");
-		
-		Iterator<String> it = al.iterator();
-		while (it.hasNext()) {
-		    String s = it.next();
-		    System.out.println(s);
-		}
-		System.out.println("========");
-		for (String s : al) {
-		    System.out.println(s);
-		}
-		System.out.println("========");
 		al.forEach(s -> {
 		    System.out.println(s);
 		});
-	* Map双列集合，每个元素包含两个值（键值对）。
+	* Map双列集合，每个元素包含两个值（键值对）。Map集合的完整格式：{key1=value1 , key2=value2 , key3=value3 , ...}
+		* Map是双列集合的祖宗接口，它的方法是全部双列集合都可以继承使用的。
+		* 实现类：
+			* HashMap:无序，不重复，无索引，值不做要求。基于哈希表。增删改查的性能都较好。
+				* 子类实现类：
+				LinkedHashMap :有序，不重复，无索引，值不做要求。
+				底层数据结构是依然哈希表，只是每个键值对元素又额外的多了一个双链表的机制记录存储的顺序。
+			* HashTable
+				* 子类实现类: Properties
+			* TreeMap:排序，不重复，无索引的，值不做要求。底层基于红黑树实现排序，增删改查性能较好
+			* Attributes
+	* Map集合遍历方式：
+		方式一：键找值的方式遍历：先获取Map集合全部的键，再根据遍历键找值。---->快捷键：iter
+		方式二：键值对的方式遍历，把“键值对“看成一个整体，难度较大。调用entrySet()方法--->快捷键：iter
+			* 实列： for (Map.Entry<Object, Object> ooe : hm.entrySet()) {
+				    System.out.println(ooe); // 输出结果：姓名=鲁凡
+				    //System.out.println(ooe.getKey()+":"+ooe.getValue()); 输出结果：姓名:鲁凡
+				}
+		方式三：JDK 1.8开始之后的新技术：Lambda表达式。调用forEach方法
+			* 实列： HashMap<String,String> hm = new HashMap<>();
+				hm.put("姓名","鲁凡");
+				hm.put("年龄","25");
+				hm.forEach((k,v)-> System.out.println(k+":"+v));
 
+## 迭代器遍历
+	 *  使用Iterator迭代器遍历序列（其序列可以是不同类型的）调用iterator()方法+快捷键：itit
+	 *  用for-each 循环遍历序列（其序列必须是同类型的）快捷键：iter
+	 *  用for 循环遍历序列（针对序列的索引进行的）快捷键：fori	
+	 
+## Collections集合工具类
+	* Collections并不属于集合，是用来操作集合的工具类。只能针对于List集合排序。
+	* 创建：静态方法无需创建，直接用Collections类名调用即可
+	* 方法：
+		* addAll(Collection<? super T> c, T... elements);  //给集合对象批量添加元素
+		* 实列： ArrayList<String> al = new ArrayList<>();
+			Collections.addAll(al,"鲁凡","迪迦","张三",……);
+			for (String s : al) {
+			    System.out.println(s);
+			}
+		* shuffle(List<?> list); //打乱List集合元素的顺序 Collection.shuffle(al);
+		* sort(List<T> list); //将集合中元素按照默认规则(升序)排序
+		* sort(List<T> list，Comparator<? super T> c); //将集合中元素按照指定规则排序
 
 ## ArrayList集合类：
 
@@ -207,17 +236,6 @@
 		* al.isEmpty(); //返回一个boolean类型，判断集合是否为空
 		* al.contains(stu3); //返回一个boolean类型，判断集合是否添加有对象stu3
 		* al.toArray(); // 返回一个Object类的数组，把集合中的元素，存储到数组中
-
-
-
-
-	* 3.遍历：
-		从集合中遍历元素，并筛选出元素删除它，应该怎么解决？
-			⚫ 从集合后面遍历然后删除，可以避免漏掉元素。
-
-		 for (Object obj : al) {
-		    System.out.println(obj);
-		}
 	
 ## LinkedList集合类的特有功能
 	* 创建： LinkedList<Object> ll = new LinkedList<>();
@@ -237,38 +255,18 @@
 		* hm.size();	//返回一个int类型，集合有多少个对象。
 		* hm.isEmpty(); //返回一个boolean类型，判断集合是否为空
 		* hm.containsKey(key||value);//返回一个boolean类型，判断是否包含key或value
+		* hm.keySet(); //获取所有键的集合
+		* hm.get(key); //根据键获取值
 
-	* 3.遍历键与值：
-		*  for (Object key : hm.keySet()) {
-           	 	System.out.println(key);
-				String[] values = hm.get(key);
-        		for (Object value : values) {
-            		System.out.println(value);
-				}
-				System.out.println("==========");
-        	}
-
-##	迭代器遍历
-	 *  使用Iterator迭代器遍历序列（其序列可以是不同类型的）静态的方法
-	 *  用for-each 循环遍历序列（其序列必须是同类型的）
-	 *  用for 循环遍历序列（针对序列的索引进行的）	
-	 *  例如： public static void main(String[] args) {
-			        HashSet hs=new HashSet();
-			
-			        hs.add("鲁凡");
-			        hs.add(3);
-			        hs.add("迪迦");
-			        hs.add(5);
-			
-			
-			        Iterator it=hs.iterator();
-			//       hs.remove(3); //删除元素
-			        System.out.println(hs.size());
-			        while (it.hasNext()) {  //判断下一个是否有元素存在，若存在执行，否则中止程序
-			            System.out.println(it.next()); //打印下一个元素
-			        }
-			
-			    }
+## Properties集合类
+	* 创建：
+		Properties pro = new Properties(); //无参
+		Properties pro = new Properties(Properties defaults);  //创建具有指定默认值的空属性列表。
+	* 方法：
+		* pro.getProperty(String key);//返回String类,使用此属性列表中指定的键搜索属性。
+		* pro.list(PrintStream out); //将此属性列表打印到指定的输出流。 
+		* pro.load(InputStream inStream); //从输入字节流读取属性列表（键和元素对）。 
+	
 ## System类：
 	* 创建：静态方法无需创建直接用类名调用
 	* 方法：
@@ -435,10 +433,7 @@
 		 for (Object obj : al) {
             System.out.println(obj);
         }
-## Collections集合工具类
-	* Collections并不属于集合，是用来操作集合的工具类。
-	* 创建：静态方法无需创建，直接用Collections类名调用即可
-	* 方法：addAll(Collection<? super T> c, T... elements); 给集合对象批量添加元素
+
 ## 二维数组(多层嵌套数组)
 	* 1.创建：
 			* int[][] a=new int[3][2];//分配3个外层空间和2个内层空间
