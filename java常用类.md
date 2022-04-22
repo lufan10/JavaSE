@@ -1,4 +1,6 @@
-## 1.变量数据类
+## 类的创建看构造器，类的功能看方法。
+
+## 变量数据类
 	* 基本数据类型：保存在栈区，创建一个固定空间保存的基本数据类型
 		①：数值型：
 			* int(整型 占4个字节)、long(长整型)、short(短整型)、byte(字节型 占1个字节)
@@ -9,12 +11,35 @@
 		⚫ 23.8，默认是double类型，加上F/f就是float类型了。
 
     * 引用数据类型 ：保存在堆区，创建一个可变空间保存的引用数据类型
-	    * String(字符串) 
-		    * 创建：String s="";
+	    * String(字符串) ：
+	    	    * 概述：
+			    可以定义字符串变量指向字符串对象，
+			    不可变字符串类型，它的对象在创建后不能被更改
+		    * 字符串对象存在哪里？
+		    	* 以""方式给出的字符串对象，在堆区的字符串常量池中存储。
+		    * String是不可变字符串的原因？
+			⚫ String变量每次的修改其实都是产生并指向了新的字符串对象。
+			⚫ 原来的字符串对象都是没有改变的，所以称不可变字符串。
+
+		    * 创建：
+		    	 * String s="";
+			 * String s1 = new String();
+		    * 字符串对象的特点有哪些？
+			⚫ 双引号创建的字符串对象，在字符串常量池中存储同一个。
+			⚫ 通过new 构造器创建的字符串对象，在堆内存中分开存储。
+
+
 		    * 方法：
 			    * "实参".equals(s); //返回一个boolean类型，判断字符串相等
+			    * s.equalsIgnoreCase;//忽略大小写比较字符串。返回一个boolean类型，判断字符串相等
 			    * s.length(); //返回一个int类型,获取总共有多少个字符
 			    * s.contains("a"); //返回一个boolean类型，用于判断s是否包含a
+			    * s.charAt(int index); //返回一个char类型，获取某个索引位置处的字符
+			    * s.toCharArray(); // 将当前字符串转换成字符数组返回
+			    * s.substring(int beginIndex, int endIndex); //根据开始和结束索引进行截取，得到新的字符串（包前不包后）
+			    * s.substring(int beginIndex); //从传入的索引处截取，截取到末尾，得到新的字符串
+
+ 
 		    * 拼接：
 			    * String s= ""+"";
 			    * String s= ""+a+"";
@@ -38,6 +63,15 @@
 		    *  Integer、Long、Short、Byte
 		    *  Double、Float
 		    *  Character、Boolean
+	    * StringBuilder类：是一个可变字符串类(对象容器)
+	    	* 创建：
+			StringBuilder sb = new StringBuilder(); //无参
+			StringBuilder sb = new StringBuilder("初始值");//有参
+		* 方法：
+			sb.append("a").append("b").……; //添加数据并拼接，支持链式编程
+			sb.length(); //返回对象内容的长度
+			sb.reverse(); //将对象内容反转
+			sb.to String();//实现把StringBuilder转换为String
 		    
     * 数据类型转换：
 	    * 1.整数转字符串：
@@ -55,6 +89,42 @@
 	    * 强制类型转换有哪些需要注意的？
 		⚫ 可能出现数据丢失。
 		⚫ 小数强制转换成整数是直接截断小数保留整数。
+		
+## Objects类
+	* 创建：静态方法无需创建，直接用类名Objects调用即可。
+	* 方法：
+		Objects.equals(Object o1,Object 02); //返回一个boolean类型，判断内容相等且安全。
+		Objects.isNull(Object obj); //返回一个boolean类型，判断对象变量是否为null，是则true。
+
+## Stream流：用于简化集合和数组操作的API。
+	* 创建：
+		* 集合获取Stream流的方式:
+			* 实现类的单列集合对象.stream(); //获取当前单列集合对象的Stream流
+			* 实现类的双列集合对象.entrySet().stream(); //获取键值对，存储到set集合中去，获取双列集合Stream流
+
+		* 数组获取Stream流的方式:
+			* stream(数组名); //获取当前数组的Stream流
+
+			* Stream.of(T……values); //获取当前数组/可变数据的Stream流
+	* 方法：
+		* filter(lambda表达式); //用于对流中的数据进行过滤
+		* limit(long maxSize); //获取前几个元素
+		* skip(long n); //跳过前几个元素
+		* distinct(); //去除流中重复的元素。依赖(hashCode和equals方法)
+		* concat(Stream a,Stream b); //合并a b流为一个流
+	* 终结操作方法:
+		* forEach(lambda表达式/快捷键 soutc); //遍历单列和双列集合均可。 
+		* count();返回流中的元素个数。
+		
+	* 注意：
+		1.中间方法也称为非终结方法，调用完成后返回新的Stream流可以继续使用，支持链式编程。
+		2.在Stream流中无法直接修改集合、数组中的数据。
+		3.终结操作方法，调用完成后流就无法继续使用了，原因是不会返回Stream了。
+	* 收集Stream流:就是把Stream流操作后的结果数据转回到集合或者数组中去。
+		* 收集到List集合： stream.collect(Collectors.toList()); //返回一个List集合
+		* 收集到Set集合：  stream.collect(Collectors.toSet());  //返回一个Set集合
+		* 收集到Map集合：  stream.collect(Collectors.toMap(Function keyMapper , Function valueMapper);  //返回一个Map集合	???????????
+
 ## 数组概念：
 	* 用来存储相同的数据类型或对象类的内存区域（一个容器）
  	* 索引(下标)：对数组进行编号，从0开始。如：变量名[0]=元素1
@@ -78,7 +148,7 @@
 		* 变量名/对象名[下标];  //返回一个int类型,获取下标为xx对应的元素。(取值)
 		* 变量名/对象名[索引]=数据; //对动态数组内的元素赋值
 
-	* 3.遍历：用循环的方式取出数组中每一个元素,搜索、数据统计等等都需要用到遍历。
+	* 3.遍历：用循环的方式取出数组中每一个元素,搜索、数据统计等等都需要用到遍历。快捷键：iter/数组名.fori
 			for (int i = 0; i < ages.length; i++) {
 				System.out.println(ages[i]);
 			}
@@ -100,29 +170,110 @@
 		⚫ 问题2：如果数组变量中没有存储数组的地址，而是null, 在访问数组信息时会出现NullPointerException(空指针异常)
 
 ## 集合概念：用来存储对象的容器，其对象只能是实体类或基本数据类型的包装类。
+	* 数组和集合的元素存储的个数问题?
+		⚫ 数组定义后类型确定，长度固定
+		⚫ 集合类型可以不固定，大小是可变的。
+	* 数组和集合适合的场景
+		⚫ 数组适合做数据个数和类型确定的场景
+		⚫ 集合适合做数据个数不确定，且要做增删元素的场景
+	* 集合中存储的元素并不是对象本身，而是对象的地址。
+	* 约定集合存储数据的类型，需要注意什么？
+		集合支持泛型。
+		集合和泛型不支持基本类型，只支持引用数据类型。
+
+## 集合类体系结构：
+	* Collection单列集合，每个元素（数据）只包含一个值。Collection集合的格式: [元素1,元素2,元素3..]
+		* Collection是单列集合的祖宗接口，它的方法是全部单列集合都可以继承使用的。
+		* List接口系列的实现类集合：添加的元素是有序、可重复、有索引。
+			ArrayList： 底层是基于数组实现的，根据查询元素快，增删相对慢。
+			LinkedList：底层基于双链表实现的，查询元素慢，增删首尾元素是非常快的。
+		* Set接口系列的实现类集合：添加的元素是无序、不重复、无索引。
+			HashSet: 无序基于哈希表的,增删改查都快
+			LinkedHashSet: 有序基于哈希表和双链表,增删改查都快
+			TreeSet：按照大小默认升序排序基于红黑树。后续也可以用List集合实现排序,可对对象进行排序
+	* Collection集合的遍历方式
+		方式一：迭代器 集合对象调用iterator()方法+快捷键：itit
+		方式二：foreach/增强for循环-----> 快捷键：iter/fori
+		方式三：lambda表达式，集合对象调用forEach(针对一个参数时使用快捷键：soutc)方法
+		ArrayList<String> al = new ArrayList<>();
+		al.add("a");
+		al.forEach(s->System.out.println(s););  或    al.forEach(System.out::println);
+	* Map双列集合，每个元素包含两个值（键值对）。Map集合的完整格式：{key1=value1 , key2=value2 , key3=value3 , ...}
+		* Map是双列集合的祖宗接口，它的方法是全部双列集合都可以继承使用的。
+		* 实现类：
+			* HashMap:无序，不重复，无索引，值不做要求。基于哈希表。增删改查的性能都较好。
+				* 子类实现类：
+				LinkedHashMap :有序，不重复，无索引，值不做要求。
+				底层数据结构是依然哈希表，只是每个键值对元素又额外的多了一个双链表的机制记录存储的顺序。
+			* HashTable
+				* 子类实现类: Properties
+			* TreeMap:排序，不重复，无索引的，值不做要求。底层基于红黑树实现排序，增删改查性能较好
+			* Attributes
+	* Map集合遍历方式：
+		方式一：键找值的方式遍历：先获取Map集合全部的键，再根据遍历键找值。---->快捷键：iter
+		方式二：键值对的方式遍历，把“键值对“看成一个整体，难度较大。调用entrySet()方法--->快捷键：iter
+			* 实列： for (Map.Entry<Object, Object> ooe : hm.entrySet()) {
+				    System.out.println(ooe); // 输出结果：姓名=鲁凡
+				    //System.out.println(ooe.getKey()+":"+ooe.getValue()); 输出结果：姓名:鲁凡
+				}
+		方式三：JDK 1.8开始之后的新技术：Lambda表达式。调用forEach方法
+			* 实列： HashMap<String,String> hm = new HashMap<>();
+				hm.put("姓名","鲁凡");
+				hm.put("年龄","25");
+				hm.forEach((k,v)-> System.out.println(k+":"+v));
+	* 不可变集合：定义完成后不可以修改，或者添加、删除
+		* 创建：List、Set、Map接口中，都存在of方法可以创建不可变集合
+## 迭代器遍历
+	 *  使用Iterator迭代器遍历序列（其序列可以是不同类型的）调用iterator()方法+快捷键：itit
+	 *  用for-each 循环遍历序列（其序列必须是同类型的）快捷键：iter
+	 *  用for 循环遍历序列（针对序列的索引进行的）快捷键：fori	
+	 
+## Collections集合工具类
+	* Collections并不属于集合，是用来操作集合的工具类。只能针对于List集合排序。
+	* 创建：静态方法无需创建，直接用Collections类名调用即可
+	* 方法：
+		* addAll(Collection<? super T> c, T... elements);  //给集合对象批量添加元素
+		* 实列： ArrayList<String> al = new ArrayList<>();
+			Collections.addAll(al,"鲁凡","迪迦","张三",……);
+			for (String s : al) {
+			    System.out.println(s);
+			}
+		* shuffle(List<?> list); //打乱List集合元素的顺序 Collection.shuffle(al);
+		* sort(List<T> list); //将集合中元素按照默认规则(升序)排序
+		* sort(List<T> list，Comparator<? super T> c); //将集合中元素按照指定规则排序
 
 ## ArrayList集合类：
 
 	* 1.创建：  ArrayList<Object> al = new ArrayList<>(); //全局式泛型类集合
 			* ArrayList<实体类/包装类...> al=new ArrayList<>(); //局部式泛型集合
+	* 泛型概述
+		* ArrayList<E>：其实就是一个泛型类，可以在编译阶段约束集合对象只能操作某种数据类型。
+		* 泛型类的格式：修饰符 class 类名<泛型变量>{  }			   public class MyArrayList<T> {}
+		* 泛型方法的格式：修饰符 <泛型变量> 方法返回值 方法名称(形参列表){}  public <T> void show(T t) {}
+		* 泛型接口的格式：修饰符 interface 接口名称<泛型变量>{}  		public interface Data<E>{}
 	* 2.方法：
 		* al.add(new 实体类()/包装类); 
 			* //添加实体类或包装类对象
 			# //当为全局式泛型类集合时，添加的多组对象元素类型可以不同。
 			#  //当为局部式泛型集合时，添加的多组对象元素类型必须一致。
+		* al.set(int index,E element); //修改指定索引处的元素，返回被修改的元素
 		* al.get(index); //返回一个实体类或包装类，通过索引获取对象元素
 		* al.size(); //返回一个int类型，集合有多少个对象。
 		* al.remove(stu2);   //移除某一个对象元素：
 		* al.clear();  //清除集合的所有对象
 		* al.isEmpty(); //返回一个boolean类型，判断集合是否为空
 		* al.contains(stu3); //返回一个boolean类型，判断集合是否添加有对象stu3
-
-	* 3.遍历：
-		 for (Object obj : al) {
-            System.out.println(obj);
-        }
+		* al.toArray(); // 返回一个Object类的数组，把集合中的元素，存储到数组中
 	
-
+## LinkedList集合类的特有功能
+	* 创建： LinkedList<Object> ll = new LinkedList<>();
+	* 方法：
+		* ll.addFirst(); //在该列表开头插入指定的元素
+		* ll.addLast(); //将指定的元素追加到此列表的末尾
+		* ll.getFirst(); //返回此列表中的第一个元素
+		* ll.getLast(); //返回此列表中的最后一个元素
+		* ll.removeLast(); //从此列表中删除并返回最后一个元素
+		* ll.removeFirst(); //从此列表中删除并返回第一个元素
 ## HashMap集合类
 	* 1.创建：
 			 HashMap<Object,Object> hm = new HashMap<>();
@@ -132,38 +283,18 @@
 		* hm.size();	//返回一个int类型，集合有多少个对象。
 		* hm.isEmpty(); //返回一个boolean类型，判断集合是否为空
 		* hm.containsKey(key||value);//返回一个boolean类型，判断是否包含key或value
+		* hm.keySet(); //获取所有键的集合
+		* hm.get(key); //根据键获取值
 
-	* 3.遍历键与值：
-		*  for (Object key : hm.keySet()) {
-           	 	System.out.println(key);
-				String[] values = hm.get(key);
-        		for (Object value : values) {
-            		System.out.println(value);
-				}
-				System.out.println("==========");
-        	}
-
-##	迭代器遍历
-	 *  使用Iterator迭代器遍历序列（其序列可以是不同类型的）静态的方法
-	 *  用for-each 循环遍历序列（其序列必须是同类型的）
-	 *  用for 循环遍历序列（针对序列的索引进行的）	
-	 *  例如： public static void main(String[] args) {
-			        HashSet hs=new HashSet();
-			
-			        hs.add("鲁凡");
-			        hs.add(3);
-			        hs.add("迪迦");
-			        hs.add(5);
-			
-			
-			        Iterator it=hs.iterator();
-			//       hs.remove(3); //删除元素
-			        System.out.println(hs.size());
-			        while (it.hasNext()) {  //判断下一个是否有元素存在，若存在执行，否则中止程序
-			            System.out.println(it.next()); //打印下一个元素
-			        }
-			
-			    }
+## Properties集合类
+	* 创建：
+		Properties pro = new Properties(); //无参
+		Properties pro = new Properties(Properties defaults);  //创建具有指定默认值的空属性列表。
+	* 方法：
+		* pro.getProperty(String key);//返回String类,使用此属性列表中指定的键搜索属性。
+		* pro.list(PrintStream out); //将此属性列表打印到指定的输出流。 
+		* pro.load(InputStream inStream); //从输入字节流读取属性列表（键和元素对）。 
+	
 ## System类：
 	* 创建：静态方法无需创建直接用类名调用
 	* 方法：
@@ -330,7 +461,7 @@
 		 for (Object obj : al) {
             System.out.println(obj);
         }
-	
+
 ## 二维数组(多层嵌套数组)
 	* 1.创建：
 			* int[][] a=new int[3][2];//分配3个外层空间和2个内层空间
