@@ -121,9 +121,9 @@
 		2.在Stream流中无法直接修改集合、数组中的数据。
 		3.终结操作方法，调用完成后流就无法继续使用了，原因是不会返回Stream了。
 	* 收集Stream流:就是把Stream流操作后的结果数据转回到集合或者数组中去。
-		* 针对List集合： stream.collect(Collectors.toList()); //返回一个List集合
-		* 针对Set集合：  stream.collect(Collectors.toSet());  //返回一个Set集合
-		* 针对Map集合：  stream.collect(Collectors.toMap(Function keyMapper , Function valueMapper);  //返回一个Map集合	
+		* 收集到List集合： stream.collect(Collectors.toList()); //返回一个List集合
+		* 收集到Set集合：  stream.collect(Collectors.toSet());  //返回一个Set集合
+		* 收集到Map集合：  stream.collect(Collectors.toMap(Function keyMapper , Function valueMapper);  //返回一个Map集合	???????????
 
 ## 数组概念：
 	* 用来存储相同的数据类型或对象类的内存区域（一个容器）
