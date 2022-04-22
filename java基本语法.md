@@ -304,3 +304,106 @@
             money *= 1.5;
         }
         System.out.println("50年后，我有"+money+"万");
+
+## 日志框架：飞机的黑匣子
+	* 日志技术具备的优势
+		1.可以将系统执行的信息选择性的记录到指定的位置（控制台、文件中、数据库中）。
+		2.可以随时以开关的形式控制是否记录日志，无需修改源代码。
+	* 日志规范接口
+		* Commons Logging 简称：JCL
+		* Simple Logging Facade for Java 简称：slf4j
+			* 日志实现框架:
+				Log4j
+				Logback
+	
+	* Logback日志框架：Logback主要分为三个技术模块：
+		slf4j-api：日志规范
+		logback-core： logback-core 模块为其他两个模块奠定了基础，必须有。
+		logback-classic：它是log4j的一个改良版本，同时它完整实现了slf4j API。
+		logback-access 模块与 Tomcat 和 Jetty 等 Servlet 容器集成，以提供 HTTP 访问日志功能
+	* 导入：
+		在项目下新建文件夹lib，导入Logback的相关jar包到该文件夹下，并添加到项目库中去。
+		必须将Logback的核心配置文件logback.xml直接拷贝到src目录下。
+	* logback.xml配置：
+		* Logback输出位置、格式设置
+			<!--日志输出路径-->
+			 <file>C:\Users\lufan\Desktop\日志\data.log</file>
+			 <fileNamePattern>C:\Users\lufan\Desktop\日志\data2-%d{yyyy-MMdd}.log%i.gz</fileNamePattern>
+			 <!--日志格式设置-->
+			  <encoder>
+			    <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			    <charset>utf-8</charset>
+			</encoder>
+		* 日志级别设置：用于控制系统中哪些日志级别是可以输出的.
+			1.级别程度依次是：TRACE< DEBUG< INFO<WARN<ERROR  ; 默认级别是debug（忽略大小写），对应其方法。
+			2.ALL  和 OFF分别是打开全部日志信息，及关闭全部日志信息
+			3.具体在<root level=“INFO”>标签的level属性中设置日志级别。
+	* 创建：	
+		public static final Logger LOGGER = LoggerFactory.getLogger("LogBackDemo.class");
+		
+	* 方法：
+		LOGGER.debug("main方法开始执行了");
+		LOGGER.info("记录第二行日志");
+		int a=10;
+		int b=0;
+		LOGGER.trace("a=" +a);
+		LOGGER.trace("b="+b);
+		e.printStackTrace();
+		LOGGER.error("功能出现异常："+e);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
