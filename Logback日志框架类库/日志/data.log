@@ -1,0 +1,10 @@
+2022-04-22 15:21:13.969 [main] DEBUG LogBackDemo.class - main方法开始执行了
+2022-04-22 15:21:13.975 [main] INFO  LogBackDemo.class - 记录第二行日志
+2022-04-22 15:21:13.986 [main] TRACE LogBackDemo.class - a=10
+2022-04-22 15:21:13.987 [main] TRACE LogBackDemo.class - b=0
+2022-04-22 15:21:13.997 [main] ERROR LogBackDemo.class - 功能出现异常：java.lang.ArithmeticException: / by zero
+2022-04-22 15:22:19.476 [main] DEBUG LogBackDemo.class - main方法开始执行了
+2022-04-22 15:22:19.483 [main] INFO  LogBackDemo.class - 记录第二行日志
+2022-04-22 15:22:19.499 [main] TRACE LogBackDemo.class - a=10
+2022-04-22 15:22:19.501 [main] TRACE LogBackDemo.class - b=0
+2022-04-22 15:22:19.511 [main] ERROR LogBackDemo.class - 功能出现异常：java.lang.ArithmeticException: / by zero
