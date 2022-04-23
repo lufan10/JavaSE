@@ -10,7 +10,7 @@
 		* 5. isDirectory();//返回一个boolean，判断当前路径是不是文件夹
 		* 6. file.getAbsolutePath();//返回一个字符串，获取文件的绝对路径(全称)
 		* 7. Arrays.toString(file.list());//返回一个字符串，//获取当前文件夹下的所有列表内容(文件名称)
-
+		* 8. file.listFiles(); //遍历获取当前目录下所有的"一级文件对象"到一个文件对象数组中去返回
 ## 字节流--读取：InputStream
 	* 创建：FileInputStream fis=null;
 			 fis=new FileInputStream(new File("读取路径"));
